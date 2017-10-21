@@ -1,0 +1,55 @@
+___________________________________________
+//How to draw score
+
+
+function drawScore(){
+  ctx.fillStyle = "blue";
+  ctx.font="15px Arial";
+  ctx.fillText(score, 10, 20);
+}
+
+
+--------------------------------------------
+
+//How to use the collision function in template
+
+if(checkCollisions(goodGuy, badGuy)){
+  badGuy.x = Math.random()*600;
+  badGuy.y = Math.random()*600;
+}
+
+
+--------------------------------------------
+
+//How to clone bad guys 
+
+var badGuysArray = [];
+
+function BadGuy(){
+  this.x = Math.random()*600;
+  this.y = Math.random()*600;
+  this.width = 20;
+  this.height = 20;
+}
+
+for(var i = 0; i < 20; i++){
+  var oneBadGuy = new BadGuy();
+  badGuysArray.push(oneBadGuy);
+}
+
+for(var i = 0; i < badGuysArray.length; i++){
+  badGuysArray[i].x += 10;
+  badGuysArray[i].y += 10;
+  ctx.fillRect(badGuysArray[i].x, badGuysArray[i].y, badGuysArray[i].width, badGuysArray[i].height);
+}
+
+//adding a check collisions with a clone
+
+for(var i = 0; i < badGuysArray.length; i++){
+  if(checkCollisions(badGuysArray[i], goodGuy)){
+    badGuysArray[i].x = Math.random()*600;
+    score ++;
+  }
+}
+
+
